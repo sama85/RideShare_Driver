@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="small_padding">10dp</dimen>
+    <dimen name="btn_width">300dp</dimen>
+    <dimen name="large_text_size_rv">15sp</dimen>
+    <dimen name="small_text_size_rv">12sp</dimen>
+    <dimen name="small_margin">16dp</dimen>
+    <dimen name="large_text_size">18sp</dimen>
+    <dimen name="margin_hor">10dp</dimen>
+    <dimen name="profile_margin">20dp</dimen>
+    <dimen name="profile_txt_size">20sp</dimen>
+</resources>

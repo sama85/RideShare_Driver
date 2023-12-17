@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/gradient_bg"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/book_ride"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main"
+        android:padding="@dimen/small_padding"
+        android:text="Create Ride"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/source_et"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:hint="Enter your Source"
+        android:minHeight="48dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_comp_source"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/destination_et"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="@string/enter_destination"
+        android:minHeight="48dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_comp_dest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/date_card"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#00958E8E"
+        app:cardCornerRadius="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/destination_et"
+        app:strokeColor="#C1000000"
+        app:strokeWidth="1dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/date_btn"
+            style="?android:spinnerStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="JAN 01 2020"
+            android:textColor="#A4000000"
+            android:textSize="18sp" />
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <!--    TODO: attach time picker when clicked-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/time_et"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="Select time"
+        android:inputType="time"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/date_card">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_comp_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <EditText
+        android:id="@+id/num_passengers_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Total No. of Passengers"
+        android:layout_marginHorizontal="@dimen/margin_hor"
+        android:textSize="20sp"
+        android:inputType="number"
+        android:layout_marginBottom="20dp"/>
+    <EditText
+        android:id="@+id/cost_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Cost per Passenger"
+        android:layout_marginHorizontal="@dimen/margin_hor"
+        android:inputType="numberDecimal"
+        android:textSize="20sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/create_btn"
+        android:layout_width="@dimen/btn_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/main"
+        android:text="Create Ride"
+        android:textColor="@color/white" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

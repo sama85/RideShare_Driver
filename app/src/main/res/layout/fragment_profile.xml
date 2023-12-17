@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/gradient_bg"
+    android:gravity="center_horizontal">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_signout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:src="@drawable/baseline_logout_24"
+        android:backgroundTint="@color/main"
+        android:contentDescription="logout"/>
+
+    <ImageView
+        android:id="@+id/driver_img_trip"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/profile"
+        android:layout_marginBottom="40dp"/>
+
+    <!-- Name Field -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/profile_margin">
+
+        <TextView
+            android:id="@+id/name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/profile_txt_size"
+            android:text="@string/name"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/profile_margin"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/profile_txt_size"
+            android:text="John Doe" />
+
+        <EditText
+            android:id="@+id/name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="48dp"
+            android:hint="Enter username"
+            android:maxLines="1"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <!-- Email Field -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/profile_margin">
+
+        <TextView
+            android:id="@+id/email_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/profile_txt_size"
+            android:text="@string/email"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/profile_margin"/>
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/profile_txt_size"
+            android:text="johndoe@example.com" />
+
+        <EditText
+            android:id="@+id/email_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_email"
+            android:maxHeight="48dp"
+            android:maxLines="1"
+            android:inputType="textEmailAddress"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="30dp">
+
+        <TextView
+            android:id="@+id/phone_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/profile_txt_size"
+            android:text="@string/phone_number"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/profile_margin"/>
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/profile_txt_size"
+            android:text="12346789993" />
+
+        <EditText
+            android:id="@+id/phone_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="48dp"
+            android:hint="@string/enter_phone_number"
+            android:maxLines="1"
+            android:visibility="gone"
+            android:inputType="phone"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/edit_btn"
+        android:layout_width="@dimen/btn_width"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/main"
+        android:layout_marginBottom="@dimen/profile_margin"
+        android:text="@string/edit" />
+
+    <Button
+        android:id="@+id/save_btn"
+        android:layout_width="@dimen/btn_width"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:backgroundTint="@color/main"
+        android:layout_marginBottom="@dimen/profile_margin"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/cancel_btn"
+        android:layout_width="@dimen/btn_width"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:backgroundTint="@color/main"
+        android:visibility="invisible" />
+
+    <!-- Other fields (add as needed) -->
+</LinearLayout>

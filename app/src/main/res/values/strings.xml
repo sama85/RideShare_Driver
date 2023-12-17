@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">RideShare_Driver</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="acc_text">Don\'t Have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="hint_name">Name</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
+    <string name="select_date">Select a Date</string>
+    <string name="hint_phone">Phone</string>
+    <string name="user_profile">User Profile</string>
+    <string name="request_ride">Request a Ride</string>
+    <string name="enter_destination">Enter Your Destination</string>
+    <string name="search_rides">Search Rides</string>
+    <string name="drivers_offers">Drivers Offers</string>
+    <string name="book_ride">Book Ride</string>
+    <string name="im_driver">I\'m a Driver</string>
+    <string name="im_rider">I\'m a Rider</string>
+    <string name="cost">cost:</string>
+    <string name="rides_history">Rides History</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
+    <string name="enter_phone_number">Enter phone number</string>
+    <string name="phone_number">Phone Number:</string>
+    <string name="enter_email">Enter email</string>
+    <string name="email">Email:</string>
+    <string name="name">Name:</string>
+</resources>

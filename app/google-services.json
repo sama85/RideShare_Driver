@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "882795622",
+    "firebase_url": "https://rideshareapp-authentication-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "rideshareapp-authentication",
+    "storage_bucket": "rideshareapp-authentication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882795622:android:24d46850e9ab7924fe79a7",
+        "android_client_info": {
+          "package_name": "com.example.rideshare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB6o95bbl3yjxD1d6yyExWwqSyxWYWeo4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882795622:android:ee60c06216bff4e7fe79a7",
+        "android_client_info": {
+          "package_name": "com.example.rideshare_driver"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB6o95bbl3yjxD1d6yyExWwqSyxWYWeo4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
