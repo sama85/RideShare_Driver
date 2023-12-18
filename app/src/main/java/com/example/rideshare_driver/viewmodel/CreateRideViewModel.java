@@ -36,11 +36,13 @@ public class CreateRideViewModel extends AndroidViewModel {
         // get driver details from room
         // create ride
         //add ride to fb
-        Ride ride = new Ride(src, dest, date, time,  Long.valueOf(capacity), Integer.valueOf(capacity), firebaseUser.getUid());
+        Ride ride = new Ride(src, dest, date, time, Long.valueOf(cost), Integer.valueOf(capacity), firebaseUser.getUid());
         ride.setDriverName(driver.getName());
         ride.setDriverPhone(driver.getPhone());
-        //ride.setCarNumber();
+        ride.setCarNumber(driver.getCarNumber());
+        //add push id to ride
         String key = ridesRef.push().getKey();
+        ride.setPushId(key);
         ridesRef.child(key).setValue(ride).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

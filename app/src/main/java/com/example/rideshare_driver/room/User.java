@@ -17,11 +17,13 @@ public class User {
     private String name;
     @NonNull
     private String phone;
+    private String carNumber;
 
-    public User(@NonNull String email, @NonNull String name, @NonNull String phone) {
+    public User(@NonNull String email, @NonNull String name, @NonNull String phone, String carNumber) {
         this.email = email;
         this.name = name;
         this.phone = phone;
+        this.carNumber = carNumber;
     }
 
     //    public int getId() {
@@ -38,5 +40,8 @@ public class User {
     @NonNull
     public String getPhone() {
         return phone;
+    }
+    public String getCarNumber() {
+        return carNumber;
     }
 }

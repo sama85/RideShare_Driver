@@ -41,17 +41,18 @@ public class SignUpActivity extends AppCompatActivity {
         binding.signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email, password, name, phone;
+                String email, password, name, phone, carNumber;
                 email = binding.email.getText().toString();
                 password = binding.password.getText().toString();
                 name = binding.name.getText().toString();
                 phone = binding.phone.getText().toString();
+                carNumber = binding.carNumber.getText().toString();
 
                 if(email.isEmpty() || name.isEmpty() || password.isEmpty() || phone.isEmpty()){
                     Toast.makeText(SignUpActivity.this, "Please complete all fields!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                viewModel.signUp(email, password, name, phone);
+                viewModel.signUp(email, password, name, phone, carNumber);
             }
         });
 

@@ -1,6 +1,7 @@
 package com.example.rideshare_driver.models;
 
 public class Ride {
+    String pushId;
     String src;
     String dest;
     String date;
@@ -9,6 +10,8 @@ public class Ride {
     String driverName;
     String driverPhone;
     String carNumber;
+    String paymentMethod;
+    String status;
     Long cost;
     Integer capacity;
 
@@ -106,5 +109,29 @@ public class Ride {
 
     public void setCost(Long cost) {
         this.cost = cost;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

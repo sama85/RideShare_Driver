@@ -11,7 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class}, version = 2, exportSchema = false)
 public abstract class UserDatabase extends RoomDatabase{
     // implemented by Room
     public abstract UserDao userDao();
@@ -25,7 +25,7 @@ public abstract class UserDatabase extends RoomDatabase{
         if(instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(), UserDatabase.class, "user_database")
                     .fallbackToDestructiveMigration()
-                    //.addCallback(roomDatabaseCallback)
+                    .addCallback(roomDatabaseCallback)
                     .build();
         }
         return instance;
@@ -40,7 +40,7 @@ public abstract class UserDatabase extends RoomDatabase{
                 UserDao dao = instance.userDao();
                 dao.deleteAll();
 
-                User user = new User("driver1@google.com", "Samy", "12345678990");
+                User user = new User("driver1@gmail.com", "driver1", "12345678990", "A1234");
                 dao.insert(user);
             });
         }

@@ -26,7 +26,7 @@ import com.example.rideshare_driver.viewmodel.ProfileViewModel;
 import java.util.Calendar;
 
 public class CreateRideFragment extends Fragment {
-    private String[] items = {"Ain Shams University Gate 3", "Ain Shams University Gate 3", "October City", "Maadi", "Nasr City"};
+    private String[] items = {"Ain Shams University Gate 3", "Ain Shams University Gate 4", "October City", "Maadi", "Nasr City"};
     private String[] times = {"7:30 am", "5:30 pm"};
     CreateRideViewModel viewModel;
     FragmentCreateRideBinding binding;
@@ -72,7 +72,7 @@ public class CreateRideFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String cost, capacity;
-                cost = binding.numPassengersEt.getText().toString();
+                cost = binding.costEt.getText().toString();
                 capacity = binding.numPassengersEt.getText().toString();
 
                 if(cost.isEmpty() || capacity.isEmpty() || src.isEmpty() || dest.isEmpty() || time.isEmpty()){

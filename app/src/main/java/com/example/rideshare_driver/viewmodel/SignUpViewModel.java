@@ -1,6 +1,7 @@
 package com.example.rideshare_driver.viewmodel;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -23,21 +24,21 @@ public class SignUpViewModel extends AndroidViewModel {
         mAuth = FirebaseAuth.getInstance();
     }
 
-    public void signUp(String email, String password, String name, String phone){
+    public void signUp(String email, String password, String name, String phone, String carNumber){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            User user = new User(email, name, phone);
+                            User user = new User(email, name, phone, carNumber);
                             repository.insert(user);
                             signUpEmail.postValue(email);
                         } else {
                             // If sign in fails, display a message to the user.
-
+                            Toast.makeText(getApplication(), "Sign Up Failed", Toast.LENGTH_LONG);
                         }
                     }
                 });
-    }
+        }
 }
