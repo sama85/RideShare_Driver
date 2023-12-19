@@ -14,6 +14,7 @@ import java.util.List;
 
 public class RequestsListAdapter extends  RecyclerView.Adapter<RequestsListAdapter.RideViewHolder>{
     List<Ride> rides;
+    List<String> riders;
     OnItemClickListener listener;
 
     @NonNull
@@ -26,7 +27,8 @@ public class RequestsListAdapter extends  RecyclerView.Adapter<RequestsListAdapt
     @Override
     public void onBindViewHolder(@NonNull RideViewHolder holder, int position) {
         Ride rideItem = rides.get(position);
-        holder.bind(rideItem);
+        String rider = riders.get(position);
+        holder.bind(rideItem, rider);
     }
 
     @Override
@@ -34,8 +36,9 @@ public class RequestsListAdapter extends  RecyclerView.Adapter<RequestsListAdapt
         return rides.size();
     }
 
-    public void updateRides(List<Ride> rides) {
+    public void updateRides(List<Ride> rides, List<String> riders) {
         this.rides = rides;
+        this.riders = riders;
         // to redraw recycler view
         notifyDataSetChanged();
     }
@@ -48,8 +51,8 @@ public class RequestsListAdapter extends  RecyclerView.Adapter<RequestsListAdapt
             this.binding = binding;
         }
 
-        public void bind(Ride rideItem) {
-            binding.riderName.setText(rideItem.getRiderName());
+        public void bind(Ride rideItem, String rider) {
+            binding.riderName.setText(rider);
             binding.source.setText(rideItem.getSrc());
             binding.destination.setText(rideItem.getDest());
             binding.date.setText(rideItem.getDate());

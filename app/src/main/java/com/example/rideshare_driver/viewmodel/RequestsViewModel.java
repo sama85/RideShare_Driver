@@ -25,7 +25,7 @@ public class RequestsViewModel extends AndroidViewModel {
     private DatabaseReference ordersRef;
     private DatabaseReference ridesRef;
     private MutableLiveData<List<String>> ridesId = new MutableLiveData<>(new ArrayList<>());
-    private List<String> riders = new ArrayList<>();
+    public List<String> riders = new ArrayList<>();
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
     public MutableLiveData<List<Ride>> getRides() {
@@ -83,12 +83,11 @@ public class RequestsViewModel extends AndroidViewModel {
                     List<Ride> ridesList = new ArrayList<>();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         Ride ride = dataSnapshot.getValue(Ride.class);
+                        // create request with ride and rider name and send to adapter to display
                         for(String id : ids) {
                             //search ride in ids
                             if (ride != null && dataSnapshot.getKey().equals(id)) {
                                 Log.i("tracking", "ride src: " + ride.getSrc());
-                                int ride_index = ridesId.getValue().indexOf(id);
-                                ride.setRiderName(riders.get(ride_index));
                                 ridesList.add(ride);
                             }
                         }
