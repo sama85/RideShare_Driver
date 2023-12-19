@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.rideshare_driver.models.Order;
 import com.example.rideshare_driver.models.Ride;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,7 +26,7 @@ public class RequestsViewModel extends AndroidViewModel {
     private DatabaseReference ordersRef;
     private DatabaseReference ridesRef;
     private MutableLiveData<List<String>> ridesId = new MutableLiveData<>(new ArrayList<>());
-    public List<String> riders = new ArrayList<>();
+    public List<Order> orders = new ArrayList<>();
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
     public MutableLiveData<List<Ride>> getRides() {
@@ -54,17 +55,20 @@ public class RequestsViewModel extends AndroidViewModel {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     List<String> ids = new ArrayList<>();
-                    List<String> ridersList = new ArrayList<>();
+                    List<Order> ordersList = new ArrayList<>();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         String id = dataSnapshot.child("rideId").getValue(String.class);
                         String riderName = dataSnapshot.child("riderName").getValue(String.class);
+                        String orderId = dataSnapshot.child("pushId").getValue(String.class);
+                        Order order = new Order(riderName, orderId);
+
                         if(id != null) {
                             ids.add(id);
-                            ridersList.add(riderName);
+                            ordersList.add(order);
                         }
                     }
                     ridesId.setValue(ids);
-                    riders = ridersList;
+                    orders = ordersList;
                 }
             }
 
@@ -101,5 +105,30 @@ public class RequestsViewModel extends AndroidViewModel {
                 Log.w("FirebaseData", "onCancelled", error.toException());
             }
         });
+    }
+
+    public void decline(Order order){
+        // update order status to declined
+        Log.i("request", order.getPushId());
+        ordersRef.child(order.getPushId()).child("status").setValue(RequestStatus.DECLINE.status);
+    }
+
+    public void confirm(Ride ride, Order order){
+        // update no. of seats left & status
+        Log.i("request", ride.getPushId());
+        Log.i("request", order.getPushId());
+        ordersRef.child(order.getPushId()).child("status").setValue(RequestStatus.CONFIRM.status);
+        ridesRef.child(ride.getPushId()).child("capacity")
+                .setValue(ride.getCapacity() - 1);
+    }
+
+    private enum RequestStatus{
+        CONFIRM("confirmed"),
+        DECLINE("declined");
+
+        private String status;
+        RequestStatus(String status){
+            this.status = status;
+        }
     }
 }

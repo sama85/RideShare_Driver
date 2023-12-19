@@ -13,11 +13,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.rideshare_driver.adapters.RequestsListAdapter;
-import com.example.rideshare_driver.databinding.FragmentProfileBinding;
 import com.example.rideshare_driver.databinding.FragmentRequestsBinding;
+import com.example.rideshare_driver.models.Order;
 import com.example.rideshare_driver.models.Ride;
-import com.example.rideshare_driver.room.User;
-import com.example.rideshare_driver.viewmodel.ProfileViewModel;
 import com.example.rideshare_driver.viewmodel.RequestsViewModel;
 
 import java.util.List;
@@ -40,6 +38,18 @@ public class RequestsFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(RequestsViewModel.class);
         RequestsListAdapter  adapter = new RequestsListAdapter();
+        RequestsListAdapter.OnRequestClickListener listener = new RequestsListAdapter.OnRequestClickListener() {
+            @Override
+            public void onConfirmClick(Ride ride, Order order) {
+                viewModel.confirm(ride, order);
+            }
+
+            @Override
+            public void onDeclineClick(Ride ride, Order order) {
+                viewModel.decline(order);
+            }
+        };
+        adapter.setOnRequestClickListener(listener);
         binding.requestsList.setAdapter(adapter);
         viewModel.getRideIds().observe(requireActivity(), new Observer<List<String>>() {
             @Override
@@ -54,7 +64,7 @@ public class RequestsFragment extends Fragment {
             @Override
             public void onChanged(List<Ride> rides) {
                 if(rides != null) {
-                    adapter.updateRides(rides, viewModel.riders);
+                    adapter.updateRides(rides, viewModel.orders);
                 }
             }
         });
