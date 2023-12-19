@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
+        android:background="#3EFAC6C6"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/rider_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/profile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/rider_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:maxLength="20"
+            android:text="Ahmed Samy"
+            android:textSize="@dimen/small_text_size_rv"
+            app:layout_constraintEnd_toEndOf="@id/rider_img"
+            app:layout_constraintStart_toStartOf="@id/rider_img"
+            app:layout_constraintTop_toBottomOf="@id/rider_img" />
+
+        <TextView
+            android:id="@+id/from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:text="@string/from"
+            android:textSize="@dimen/large_text_size_rv"
+            app:layout_constraintStart_toEndOf="@id/rider_img"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Abasseya "
+            android:textSize="@dimen/large_text_size_rv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/from"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/to"
+            android:textSize="@dimen/large_text_size_rv"
+            app:layout_constraintStart_toStartOf="@id/from"
+            app:layout_constraintTop_toBottomOf="@id/from" />
+
+        <TextView
+            android:id="@+id/destination"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ain "
+            android:textSize="@dimen/large_text_size_rv"
+            app:layout_constraintEnd_toEndOf="@+id/source"
+            app:layout_constraintStart_toStartOf="@id/source"
+            app:layout_constraintTop_toTopOf="@id/to" />
+
+
+        <TextView
+            android:id="@+id/cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/cost"
+            android:textSize="@dimen/large_text_size_rv"
+            app:layout_constraintStart_toStartOf="@id/to"
+            app:layout_constraintTop_toBottomOf="@id/to" />
+
+        <TextView
+            android:id="@+id/cost_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="200 EGP"
+            android:textSize="@dimen/large_text_size_rv"
+            app:layout_constraintEnd_toEndOf="@+id/destination"
+            app:layout_constraintStart_toStartOf="@+id/destination"
+            app:layout_constraintTop_toTopOf="@id/cost" />
+
+        <TextView
+            android:id="@+id/payment_method"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Payment method:"
+            android:textSize="@dimen/large_text_size_rv"
+            app:layout_constraintStart_toStartOf="@id/cost"
+            app:layout_constraintTop_toBottomOf="@id/cost" />
+
+        <TextView
+            android:id="@+id/payment_method_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Credit Card"
+            android:textSize="@dimen/large_text_size_rv"
+            app:layout_constraintEnd_toEndOf="@+id/cost_value"
+            app:layout_constraintStart_toStartOf="@+id/cost_value"
+            app:layout_constraintTop_toTopOf="@id/payment_method" />
+
+        <TextView
+            android:id="@+id/capacity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Seats Left:"
+            android:textSize="@dimen/large_text_size_rv"
+            app:layout_constraintStart_toStartOf="@id/payment_method"
+            app:layout_constraintTop_toBottomOf="@id/payment_method" />
+
+        <TextView
+            android:id="@+id/capacity_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2 "
+            android:textSize="@dimen/large_text_size_rv"
+            app:layout_constraintEnd_toEndOf="@+id/payment_method_value"
+            app:layout_constraintStart_toStartOf="@+id/payment_method_value"
+            app:layout_constraintTop_toTopOf="@id/capacity" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawablePadding="5dp"
+            android:text="Tuseday-Nov 10"
+            android:textSize="@dimen/small_text_size_rv"
+            app:drawableStartCompat="@drawable/calendar"
+            app:layout_constraintEnd_toStartOf="@+id/time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/capacity" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:text="Depart at: 7:30 am"
+            android:textSize="@dimen/small_text_size_rv"
+            app:drawableStartCompat="@drawable/calendar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/date"
+            app:layout_constraintTop_toTopOf="@id/date" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/confirm_btn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/main"
+            android:text="Confirm"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/decline_btn"
+            app:layout_constraintEnd_toStartOf="@+id/decline_btn"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/decline_btn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/main"
+            android:text="Decline"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/confirm_btn"
+            app:layout_constraintTop_toTopOf="@id/confirm_btn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

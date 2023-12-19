@@ -12,6 +12,7 @@ public class Ride {
     String carNumber;
     String paymentMethod;
     String status;
+    String riderName;
     Long cost;
     Integer capacity;
 
@@ -133,5 +134,13 @@ public class Ride {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getRiderName() {
+        return riderName;
+    }
+
+    public void setRiderName(String riderName) {
+        this.riderName = riderName;
     }
 }

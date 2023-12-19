@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Profile"
+    <item android:title=" "
         android:id="@+id/profileFragment"
-        android:icon="@drawable/ic_profile"/>
-    <item android:title="Create Ride"
+        android:icon="@drawable/baseline_person_24"/>
+    <item android:title=" "
         android:id="@+id/createRideFragment"
         android:icon="@drawable/ic_search"/>
-    <item android:title="Track rides"
+    <item android:title=" "
+        android:id="@+id/requestsFragment"
+        android:icon="@drawable/ic_request"/>
+    <item android:title=" "
         android:id="@+id/history_item"
         android:icon="@drawable/ic_history"/>
 </menu>

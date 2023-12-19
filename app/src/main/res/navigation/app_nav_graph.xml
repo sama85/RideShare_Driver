@@ -14,4 +14,8 @@
         android:name="com.example.rideshare_driver.view.profileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/requestsFragment"
+        android:name="com.example.rideshare_driver.view.RequestsFragment"
+        android:label="RequestsFragment" />
 </navigation>
