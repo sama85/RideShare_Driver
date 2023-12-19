@@ -1,5 +1,6 @@
 package com.example.rideshare_driver.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -39,6 +40,9 @@ public class RequestsListAdapter extends  RecyclerView.Adapter<RequestsListAdapt
     public void updateRides(List<Ride> rides, List<Order> orders) {
         this.rides = rides;
         this.orders = orders;
+        Log.i("requests", "rides" + String.valueOf(rides.size()));
+        if(rides.size() > 0) Log.i("requests", rides.get(0).getPushId());
+        Log.i("requests", "orders" + String.valueOf(orders.size()));
         // to redraw recycler view
         notifyDataSetChanged();
     }
@@ -57,6 +61,7 @@ public class RequestsListAdapter extends  RecyclerView.Adapter<RequestsListAdapt
             binding.destination.setText(rideItem.getDest());
             binding.date.setText(rideItem.getDate());
             binding.time.setText(rideItem.getTime());
+            binding.capacityValue.setText(String.valueOf(rideItem.getCapacity()));
             binding.costValue.setText(String.valueOf(rideItem.getCost()));
             binding.confirmBtn.setOnClickListener(view -> {
                 if(listener != null)

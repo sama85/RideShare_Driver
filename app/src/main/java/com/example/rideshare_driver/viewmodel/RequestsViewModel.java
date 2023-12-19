@@ -111,26 +111,36 @@ public class RequestsViewModel extends AndroidViewModel {
 
     public void decline(Ride ride, Order order){
         // update order status to declined
-        Log.i("request", order.getPushId());
         ordersRef.child(order.getPushId()).child("status").setValue(RequestStatus.DECLINE.status);
         // remove this ride from rides list
-        removeFromRequests(ride);
+        //removeFromRequests(ride, order);
     }
 
     public void confirm(Ride ride, Order order){
-        // update no. of seats left & status
-        Log.i("request", ride.getPushId());
-        Log.i("request", order.getPushId());
+        // update no. of seats left & order status
         ordersRef.child(order.getPushId()).child("status").setValue(RequestStatus.CONFIRM.status);
+        removeFromRequests(ride, order);
         ridesRef.child(ride.getPushId()).child("capacity")
                 .setValue(ride.getCapacity() - 1);
-        removeFromRequests(ride);
+        // update ride status if fully booked to be unavailable
+        if(ride.getCapacity() == 1){
+            ridesRef.child(ride.getPushId()).child("status")
+                    .setValue(CreateRideViewModel.RideStatus.UNAVAILABLE.status);
+        }
+
+
     }
 
-    private void removeFromRequests(Ride ride) {
+    private void removeFromRequests(Ride ride, Order order) {
         List<Ride> ridesList = rides.getValue();
+        List<String> idsList = ridesId.getValue();
+//
+//        orders.remove(order);
+//
+//        rides.setValue(ridesList);
         ridesList.remove(ride);
-        rides.setValue(ridesList);
+        idsList.remove(ride.getPushId());
+        ridesId.setValue(idsList);
     }
 
     private enum RequestStatus{

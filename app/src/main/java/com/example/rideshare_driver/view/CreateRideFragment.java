@@ -75,18 +75,24 @@ public class CreateRideFragment extends Fragment {
                 cost = binding.costEt.getText().toString();
                 capacity = binding.numPassengersEt.getText().toString();
 
-                if(cost.isEmpty() || capacity.isEmpty() || src.isEmpty() || dest.isEmpty() || time.isEmpty()){
-                    Toast.makeText(requireActivity(), "Please complete all fields!", Toast.LENGTH_SHORT).show();
-                    return;
+                if(cost.isEmpty()|| capacity.isEmpty() || src.isEmpty() || dest.isEmpty() || time.isEmpty()
+                        || Integer.valueOf(capacity) < 1){
+                    if(Integer.valueOf(capacity) > 0)
+                        Toast.makeText(requireActivity(), "Please complete all fields!", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(requireActivity(), "Please enter positive capacity!", Toast.LENGTH_SHORT).show();
+
                 }
-                viewModel.driver.observe(requireActivity(), new Observer<User>() {
-                    @Override
-                    public void onChanged(User driver) {
-                        if(driver != null){
-                            viewModel.createRide(src, dest, date, time, cost, capacity, driver);
+                else {
+                    viewModel.driver.observe(requireActivity(), new Observer<User>() {
+                        @Override
+                        public void onChanged(User driver) {
+                            if (driver != null) {
+                                viewModel.createRide(src, dest, date, time, cost, capacity, driver);
+                            }
                         }
-                    }
-                });
+                    });
+                }
 
             }
         });

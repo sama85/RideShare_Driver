@@ -40,6 +40,7 @@ public class CreateRideViewModel extends AndroidViewModel {
         ride.setDriverName(driver.getName());
         ride.setDriverPhone(driver.getPhone());
         ride.setCarNumber(driver.getCarNumber());
+        ride.setStatus(RideStatus.AVAILABLE.status);
         //add push id to ride
         String key = ridesRef.push().getKey();
         ride.setPushId(key);
@@ -51,5 +52,12 @@ public class CreateRideViewModel extends AndroidViewModel {
         });
     }
 
-
+    public enum RideStatus{
+        AVAILABLE("available"),
+        UNAVAILABLE("unavailable");
+       public String status;
+        private RideStatus(String status){
+            this.status = status;
+        }
+    }
 }
