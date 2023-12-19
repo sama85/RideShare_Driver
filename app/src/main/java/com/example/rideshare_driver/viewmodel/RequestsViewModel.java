@@ -60,9 +60,11 @@ public class RequestsViewModel extends AndroidViewModel {
                         String id = dataSnapshot.child("rideId").getValue(String.class);
                         String riderName = dataSnapshot.child("riderName").getValue(String.class);
                         String orderId = dataSnapshot.child("pushId").getValue(String.class);
+                        String orderStatus = dataSnapshot.child("status").getValue(String.class);
                         Order order = new Order(riderName, orderId);
 
-                        if(id != null) {
+                        // fetch only pending requests
+                        if(id != null && orderStatus.equals(RequestStatus.PENDING.status)) {
                             ids.add(id);
                             ordersList.add(order);
                         }
@@ -107,10 +109,12 @@ public class RequestsViewModel extends AndroidViewModel {
         });
     }
 
-    public void decline(Order order){
+    public void decline(Ride ride, Order order){
         // update order status to declined
         Log.i("request", order.getPushId());
         ordersRef.child(order.getPushId()).child("status").setValue(RequestStatus.DECLINE.status);
+        // remove this ride from rides list
+        removeFromRequests(ride);
     }
 
     public void confirm(Ride ride, Order order){
@@ -120,11 +124,19 @@ public class RequestsViewModel extends AndroidViewModel {
         ordersRef.child(order.getPushId()).child("status").setValue(RequestStatus.CONFIRM.status);
         ridesRef.child(ride.getPushId()).child("capacity")
                 .setValue(ride.getCapacity() - 1);
+        removeFromRequests(ride);
+    }
+
+    private void removeFromRequests(Ride ride) {
+        List<Ride> ridesList = rides.getValue();
+        ridesList.remove(ride);
+        rides.setValue(ridesList);
     }
 
     private enum RequestStatus{
         CONFIRM("confirmed"),
-        DECLINE("declined");
+        DECLINE("declined"),
+        PENDING("pending");
 
         private String status;
         RequestStatus(String status){

@@ -46,7 +46,7 @@ public class RequestsFragment extends Fragment {
 
             @Override
             public void onDeclineClick(Ride ride, Order order) {
-                viewModel.decline(order);
+                viewModel.decline(ride, order);
             }
         };
         adapter.setOnRequestClickListener(listener);
