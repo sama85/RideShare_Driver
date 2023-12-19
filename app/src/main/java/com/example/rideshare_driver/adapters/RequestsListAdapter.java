@@ -60,6 +60,7 @@ public class RequestsListAdapter extends  RecyclerView.Adapter<RequestsListAdapt
             binding.source.setText(rideItem.getSrc());
             binding.destination.setText(rideItem.getDest());
             binding.date.setText(rideItem.getDate());
+            binding.paymentMethodValue.setText(order.getPaymentMethod());
             binding.time.setText(rideItem.getTime());
             binding.capacityValue.setText(String.valueOf(rideItem.getCapacity()));
             binding.costValue.setText(String.valueOf(rideItem.getCost()));

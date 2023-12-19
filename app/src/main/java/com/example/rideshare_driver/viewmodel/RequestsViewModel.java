@@ -61,7 +61,8 @@ public class RequestsViewModel extends AndroidViewModel {
                         String riderName = dataSnapshot.child("riderName").getValue(String.class);
                         String orderId = dataSnapshot.child("pushId").getValue(String.class);
                         String orderStatus = dataSnapshot.child("status").getValue(String.class);
-                        Order order = new Order(riderName, orderId);
+                        String paymentMethod = dataSnapshot.child("paymentMethod").getValue(String.class);
+                        Order order = new Order(riderName, orderId, paymentMethod);
 
                         // fetch only pending requests
                         if(id != null && orderStatus.equals(RequestStatus.PENDING.status)) {
