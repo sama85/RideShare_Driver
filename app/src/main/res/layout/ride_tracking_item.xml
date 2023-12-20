@@ -149,13 +149,13 @@
             app:layout_constraintStart_toEndOf="@+id/date"
             app:layout_constraintTop_toTopOf="@id/date" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancel_btn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:backgroundTint="@color/main"
             android:text="Cancel Ride"
-            android:visibility="gone"
             android:textSize="@dimen/large_text_size_rv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

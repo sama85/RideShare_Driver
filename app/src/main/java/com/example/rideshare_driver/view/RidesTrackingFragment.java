@@ -34,6 +34,13 @@ public class RidesTrackingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this).get(RidesTrackingViewModel.class);
         RidesTrackingAdapter adapter = new RidesTrackingAdapter();
+        RidesTrackingAdapter.OnTrackingClickListener listener = new RidesTrackingAdapter.OnTrackingClickListener() {
+            @Override
+            public void onItemClick(Ride ride) {
+                viewModel.cancelRide(ride);
+            }
+        };
+        adapter.setOnTrackingClickListener(listener);
         binding.ridesTrackingList.setAdapter(adapter);
         viewModel.getRides().observe(getViewLifecycleOwner(), new Observer<List<Ride>>() {
             @Override

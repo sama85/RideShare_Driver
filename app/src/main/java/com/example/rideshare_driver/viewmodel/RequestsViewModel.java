@@ -97,7 +97,8 @@ public class RequestsViewModel extends AndroidViewModel {
                         // create request with ride and rider name and send to adapter to display
                         for(String id : ids) {
                             //search ride in ids
-                            if (ride != null && dataSnapshot.getKey().equals(id)) {
+                            if (ride != null && dataSnapshot.getKey().equals(id)
+                            && !ride.getStatus().equals("cancelled")) {
                                 int idx = ridesId.getValue().indexOf(id);
                                 Order order = orders.get(idx);
 

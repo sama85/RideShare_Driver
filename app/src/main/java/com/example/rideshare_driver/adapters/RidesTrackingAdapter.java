@@ -1,6 +1,7 @@
 package com.example.rideshare_driver.adapters;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdapter.RideViewHolder> {
     List<Ride> rides;
+    OnTrackingClickListener listener;
 
     @NonNull
     @Override
@@ -54,9 +56,16 @@ public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdap
             binding.date.setText(rideItem.getDate());
             binding.time.setText(rideItem.getTime());
             binding.costValue.setText(String.valueOf(rideItem.getCost()));
-
             binding.statusValue.setText(rideItem.getStatus());
             binding.carNoValue.setText(rideItem.getCarNumber());
+            binding.cancelBtn.setOnClickListener(view -> {
+                if(listener != null)
+                    listener.onItemClick(rideItem);
+            });
+            if(rideItem.getStatus().equals("cancelled"))
+                binding.cancelBtn.setVisibility(View.GONE);
+            else
+                binding.cancelBtn.setVisibility(View.VISIBLE);
 
             if(rideItem.getStatus().equals("available"))
                 binding.statusValue.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.green));
@@ -66,5 +75,11 @@ public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdap
                 binding.statusValue.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.black));
         }
 
+    }
+    public interface OnTrackingClickListener{
+        void onItemClick(Ride ride);
+    }
+    public void setOnTrackingClickListener(OnTrackingClickListener listener){
+        this.listener = listener;
     }
 }

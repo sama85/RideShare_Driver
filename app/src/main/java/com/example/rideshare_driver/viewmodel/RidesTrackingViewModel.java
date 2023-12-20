@@ -16,6 +16,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +53,7 @@ public class RidesTrackingViewModel extends AndroidViewModel {
                         Ride ride = dataSnapshot.getValue(Ride.class);
                         //search ride in ids
                         if (ride != null && ride.getDriverId().equals(firebaseUser.getUid())) {
+                            checkExpiryTime(ride);
                             ridesList.add(ride);
                         }
                     }
@@ -62,5 +67,27 @@ public class RidesTrackingViewModel extends AndroidViewModel {
             }
         });
     }
+
+    public void cancelRide(Ride ride){
+        if(!ride.getStatus().equals("complete")){
+            ridesRef.child(ride.getPushId()).child("status").setValue("cancelled");
+        }
+    }
+
+    private void checkExpiryTime(Ride ride) {
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+            DateTimeFormatter timeFormatter= DateTimeFormatter.ofPattern("h:mm a");
+
+            LocalDate rideDate = LocalDate.parse(ride.getDate(), formatter);
+            LocalTime rideTime = LocalTime.parse(ride.getTime(), timeFormatter);
+            LocalDateTime rideDateTime = LocalDateTime.of(rideDate, rideTime);
+
+            // Get the current date and time for comparison with request deadline
+            LocalDateTime currentDateTime = LocalDateTime.now();
+
+            if(currentDateTime.isAfter(rideDateTime))
+                ridesRef.child(ride.getPushId()).child("status").setValue("completed");
+        }
 
 }
