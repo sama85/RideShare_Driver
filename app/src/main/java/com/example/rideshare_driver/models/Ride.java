@@ -13,6 +13,7 @@ public class Ride {
     String paymentMethod;
     String status;
     String riderName;
+    String rideCompositeKey;
     Long cost;
     Integer capacity;
 
@@ -142,5 +143,13 @@ public class Ride {
 
     public void setRiderName(String riderName) {
         this.riderName = riderName;
+    }
+
+    public String getRideCompositeKey() {
+        return rideCompositeKey;
+    }
+
+    public void setRideCompositeKey(String rideCompositeKey) {
+        this.rideCompositeKey = rideCompositeKey;
     }
 }

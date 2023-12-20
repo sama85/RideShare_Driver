@@ -19,10 +19,9 @@
 
     <ImageView
         android:id="@+id/driver_img_trip"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
         android:src="@drawable/profile"
         android:layout_marginBottom="40dp"/>
 
@@ -97,7 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="30dp">
+        android:layout_marginBottom="20dp">
 
         <TextView
             android:id="@+id/phone_label"
@@ -117,6 +116,38 @@
 
         <EditText
             android:id="@+id/phone_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="48dp"
+            android:hint="@string/enter_phone_number"
+            android:maxLines="1"
+            android:visibility="gone"
+            android:inputType="phone"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:id="@+id/car_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/profile_txt_size"
+            android:text="Car Number:"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/profile_margin"/>
+
+        <TextView
+            android:id="@+id/car_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/profile_txt_size"
+            android:text="B1234" />
+
+        <EditText
+            android:id="@+id/car_number_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxHeight="48dp"

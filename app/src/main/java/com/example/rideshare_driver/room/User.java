@@ -44,4 +44,16 @@ public class User {
     public String getCarNumber() {
         return carNumber;
     }
+
+    public void setName(@NonNull String name) {
+        this.name = name;
+    }
+
+    public void setPhone(@NonNull String phone) {
+        this.phone = phone;
+    }
+
+    public void setCarNumber(String carNumber) {
+        this.carNumber = carNumber;
+    }
 }

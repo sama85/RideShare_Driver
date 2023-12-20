@@ -9,28 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.rideshare_driver.R;
-
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.rideshare_driver.R;
 import com.example.rideshare_driver.databinding.FragmentProfileBinding;
 
 import com.example.rideshare_driver.room.User;
 import com.example.rideshare_driver.viewmodel.ProfileViewModel;
-import com.example.rideshare_driver.room.User;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class profileFragment extends Fragment {
     private FragmentProfileBinding binding;
@@ -53,7 +41,7 @@ public class profileFragment extends Fragment {
             @Override
             public void onChanged(User user) {
                 if(user != null)
-                    updateProfileData(user);
+                    displayProfileData(user);
             }
         });
 
@@ -73,7 +61,14 @@ public class profileFragment extends Fragment {
         });
 
         binding.saveBtn.setOnClickListener(v -> {
-            viewModel.handle_save_click();
+            String name, email, phone, carNumber;
+            name = binding.nameEt.getText().toString();
+            email = binding.emailEt.getText().toString();
+            phone = binding.phone.getText().toString();
+            carNumber = binding.carNumberEt.getText().toString();
+            if(name.isEmpty() || email.isEmpty() || phone.isEmpty() || carNumber.isEmpty())
+                Toast.makeText(requireActivity(), "Please enter all fields", Toast.LENGTH_SHORT).show();
+            else viewModel.handle_save_click(name, email, phone, carNumber);
         });
 
         // Handle cancel action
@@ -85,12 +80,15 @@ public class profileFragment extends Fragment {
     // Method to toggle between display and edit modes
     private void setEditMode(boolean enabled) {
         if (enabled) {
+            binding.emailEt.setEnabled(false);
             binding.nameEt.setVisibility(View.VISIBLE);
             binding.emailEt.setVisibility(View.VISIBLE);
             binding.phoneEt.setVisibility(View.VISIBLE);
+            binding.carNumberEt.setVisibility(View.VISIBLE);
             binding.name.setVisibility(View.GONE);
             binding.email.setVisibility(View.GONE);
             binding.phone.setVisibility(View.GONE);
+            binding.carNumber.setVisibility(View.GONE);
             binding.editBtn.setVisibility(View.GONE);
             binding.saveBtn.setVisibility(View.VISIBLE);
             binding.cancelBtn.setVisibility(View.VISIBLE);
@@ -98,19 +96,27 @@ public class profileFragment extends Fragment {
             binding.nameEt.setVisibility(View.GONE);
             binding.emailEt.setVisibility(View.GONE);
             binding.phoneEt.setVisibility(View.GONE);
+            binding.carNumberEt.setVisibility(View.GONE);
             binding.name.setVisibility(View.VISIBLE);
             binding.email.setVisibility(View.VISIBLE);
             binding.phone.setVisibility(View.VISIBLE);
+            binding.carNumber.setVisibility(View.VISIBLE);
             binding.editBtn.setVisibility(View.VISIBLE);
             binding.saveBtn.setVisibility(View.GONE);
             binding.cancelBtn.setVisibility(View.GONE);
         }
     }
 
-    private void updateProfileData(User user){
+    private void displayProfileData(User user){
         binding.name.setText(user.getName());
         binding.email.setText(user.getEmail());
         binding.phone.setText(user.getPhone());
+        binding.carNumber.setText(user.getCarNumber());
+
+        binding.nameEt.setText(user.getName());
+        binding.emailEt.setText(user.getEmail());
+        binding.phoneEt.setText(user.getPhone());
+        binding.carNumberEt.setText(user.getCarNumber());
     }
     void navigateToSignIn(){
         Intent intent  = new Intent(getActivity(), SignInActivity.class);

@@ -143,10 +143,7 @@ public class RequestsViewModel extends AndroidViewModel {
     private void removeFromRequests(Ride ride, Order order) {
         List<Ride> ridesList = rides.getValue();
         List<String> idsList = ridesId.getValue();
-//
-//        orders.remove(order);
-//
-//        rides.setValue(ridesList);
+
         ridesList.remove(ride);
         idsList.remove(ride.getPushId());
         ridesId.setValue(idsList);

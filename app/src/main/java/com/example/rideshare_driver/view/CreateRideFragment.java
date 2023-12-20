@@ -26,8 +26,7 @@ import com.example.rideshare_driver.viewmodel.ProfileViewModel;
 import java.util.Calendar;
 
 public class CreateRideFragment extends Fragment {
-    private String[] items = {"Ain Shams University Gate 3", "Ain Shams University Gate 4", "October City", "Maadi", "Nasr City"};
-    private String[] times = {"7:30 am", "5:30 pm"};
+
     CreateRideViewModel viewModel;
     FragmentCreateRideBinding binding;
     private ArrayAdapter<String> itemsAdapter;
@@ -50,8 +49,8 @@ public class CreateRideFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this).get(CreateRideViewModel.class);
-        itemsAdapter = new ArrayAdapter<String>(getActivity(), R.layout.drop_down_menu_item, items);
-        timesAdapter = new ArrayAdapter<String>(getActivity(), R.layout.drop_down_menu_item, times);
+        itemsAdapter = new ArrayAdapter<String>(getActivity(), R.layout.drop_down_menu_item, viewModel.getLocations());
+        timesAdapter = new ArrayAdapter<String>(getActivity(), R.layout.drop_down_menu_item, viewModel.getTimes());
         binding.autoCompSource.setAdapter(itemsAdapter);
         binding.autoCompDest.setAdapter(itemsAdapter);
         binding.autoCompTime.setAdapter(timesAdapter);
@@ -76,12 +75,11 @@ public class CreateRideFragment extends Fragment {
                 capacity = binding.numPassengersEt.getText().toString();
 
                 if(cost.isEmpty()|| capacity.isEmpty() || src.isEmpty() || dest.isEmpty() || time.isEmpty()
-                        || Integer.valueOf(capacity) < 1){
-                    if(Integer.valueOf(capacity) > 0)
+                        ||  Integer.valueOf(capacity) < 1){
+                    if((!capacity.isEmpty() && Integer.valueOf(capacity) > 0))
                         Toast.makeText(requireActivity(), "Please complete all fields!", Toast.LENGTH_SHORT).show();
                     else
                         Toast.makeText(requireActivity(), "Please enter positive capacity!", Toast.LENGTH_SHORT).show();
-
                 }
                 else {
                     viewModel.driver.observe(requireActivity(), new Observer<User>() {
@@ -120,13 +118,14 @@ public class CreateRideFragment extends Fragment {
 
             }
         };
-
+        date = getTodaysDate();
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
         int style = AlertDialog.THEME_HOLO_LIGHT;
+
         this.datePickerDialog = new DatePickerDialog(requireActivity(), style, dateSetListener, year, month, day);
     }
 

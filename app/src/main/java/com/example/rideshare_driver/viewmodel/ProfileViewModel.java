@@ -1,6 +1,7 @@
 package com.example.rideshare_driver.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -37,8 +38,14 @@ public class ProfileViewModel extends AndroidViewModel{
     public void handle_edit_click(){
         isEditMode.setValue(true);
     }
-    public void handle_save_click(){
+    public void handle_save_click(String name, String email, String phone, String carNumber){
         isEditMode.setValue(false);
+        User currentUser = user.getValue();
+        currentUser.setName(name);
+        currentUser.setPhone(phone);
+        currentUser.setCarNumber(carNumber);
+
+        repository.update(currentUser);
     }
 
     public void handle_cancel_click(){
