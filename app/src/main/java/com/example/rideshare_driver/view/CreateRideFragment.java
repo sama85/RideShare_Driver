@@ -31,6 +31,8 @@ public class CreateRideFragment extends Fragment {
     FragmentCreateRideBinding binding;
     private ArrayAdapter<String> itemsAdapter;
     private ArrayAdapter<String> timesAdapter;
+    private ArrayAdapter<String> ainShamsAdapter;
+    private ArrayAdapter<String> destAdapter;
     private DatePickerDialog datePickerDialog;
     private String src;
     private  String dest;
@@ -51,6 +53,9 @@ public class CreateRideFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(CreateRideViewModel.class);
         itemsAdapter = new ArrayAdapter<String>(getActivity(), R.layout.drop_down_menu_item, viewModel.getLocations());
         timesAdapter = new ArrayAdapter<String>(getActivity(), R.layout.drop_down_menu_item, viewModel.getTimes());
+        ainShamsAdapter = new ArrayAdapter<String>(getActivity(), R.layout.drop_down_menu_item, viewModel.getAinShamsLocations());
+        destAdapter = new ArrayAdapter<String>(getActivity(), R.layout.drop_down_menu_item, viewModel.getDestlocations());
+
         binding.autoCompSource.setAdapter(itemsAdapter);
         binding.autoCompDest.setAdapter(itemsAdapter);
         binding.autoCompTime.setAdapter(timesAdapter);
@@ -59,6 +64,10 @@ public class CreateRideFragment extends Fragment {
         initDatePicker();
         binding.autoCompSource.setOnItemClickListener((adapterView, view1, i, l) -> {
             src = adapterView.getItemAtPosition(i).toString();
+            if(!src.equals("Ain Shams University Gate 3") && !src.equals("Ain Shams University Gate 4"))
+                binding.autoCompDest.setAdapter(ainShamsAdapter);
+            else
+                binding.autoCompDest.setAdapter(destAdapter);
         });
         binding.autoCompDest.setOnItemClickListener((adapterView, view1, i, l) -> {
             dest = adapterView.getItemAtPosition(i).toString();

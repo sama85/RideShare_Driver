@@ -23,7 +23,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class CreateRideViewModel extends AndroidViewModel {
     private String[] locations = {"Ain Shams University Gate 3", "Ain Shams University Gate 4", "October City", "Maadi", "Nasr City","Haram", "Fifth Settlement", "Zayed City"};
+    private String[] destlocations = {"October City", "Maadi", "Nasr City","Haram", "Fifth Settlement", "Zayed City"};
     private String[] times = {"7:30 AM", "5:30 PM"};
+    private String[] ainShamsLocations = {"Ain Shams University Gate 3", "Ain Shams University Gate 4"};
+
     Repository repository;
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
@@ -87,6 +90,14 @@ public class CreateRideViewModel extends AndroidViewModel {
 
     public String[] getTimes() {
         return times;
+    }
+
+    public String[] getAinShamsLocations() {
+        return ainShamsLocations;
+    }
+
+    public String[] getDestlocations() {
+        return destlocations;
     }
 
     public enum RideStatus{
