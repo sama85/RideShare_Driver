@@ -18,6 +18,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +66,7 @@ public class RequestsViewModel extends AndroidViewModel {
                         String orderId = dataSnapshot.child("pushId").getValue(String.class);
                         String orderStatus = dataSnapshot.child("status").getValue(String.class);
                         String paymentMethod = dataSnapshot.child("paymentMethod").getValue(String.class);
-                        Order order = new Order(riderName, orderId, paymentMethod);
+                        Order order = new Order(riderName, orderId, paymentMethod, orderStatus);
 
                         // fetch only pending requests
                         if(id != null && orderStatus.equals(RequestStatus.PENDING.status)) {
@@ -94,8 +98,12 @@ public class RequestsViewModel extends AndroidViewModel {
                         for(String id : ids) {
                             //search ride in ids
                             if (ride != null && dataSnapshot.getKey().equals(id)) {
-                                Log.i("tracking", "ride src: " + ride.getSrc());
-                                ridesList.add(ride);
+                                int idx = ridesId.getValue().indexOf(id);
+                                Order order = orders.get(idx);
+
+                                // add only non-expired requests to display
+                                if(!checkExpired(ride, order))
+                                    ridesList.add(ride);
                             }
                         }
                     }
@@ -142,6 +150,32 @@ public class RequestsViewModel extends AndroidViewModel {
         ridesList.remove(ride);
         idsList.remove(ride.getPushId());
         ridesId.setValue(idsList);
+    }
+
+    private boolean checkExpired(Ride ride, Order order) {
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+            DateTimeFormatter timeFormatter= DateTimeFormatter.ofPattern("h:mm a");
+
+            LocalDate date2 = LocalDate.parse(ride.getDate(), formatter);
+            LocalTime time2;
+
+            LocalDateTime deadlineDateTime;
+
+            // Get the current date and time for comparison with request deadline
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            if(ride.getTime().contains("PM")){
+                time2 = LocalTime.parse("4:30 PM", timeFormatter);
+                deadlineDateTime = LocalDateTime.of(date2, time2);
+            }
+            else{
+                time2 = LocalTime.parse("11:30 PM", timeFormatter);
+                deadlineDateTime = LocalDateTime.of(date2, time2);
+            }
+            if(currentDateTime.isAfter(deadlineDateTime))
+               return true;
+
+            else return false;
     }
 
     private enum RequestStatus{
