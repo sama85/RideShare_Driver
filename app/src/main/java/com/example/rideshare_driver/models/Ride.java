@@ -13,7 +13,7 @@ public class Ride {
     String paymentMethod;
     String status;
     String riderName;
-    String rideCompositeKey;
+    String dateTime;
     Long cost;
     Integer capacity;
 
@@ -145,11 +145,11 @@ public class Ride {
         this.riderName = riderName;
     }
 
-    public String getRideCompositeKey() {
-        return rideCompositeKey;
+    public String getDateTime() {
+        return dateTime;
     }
 
-    public void setRideCompositeKey(String rideCompositeKey) {
-        this.rideCompositeKey = rideCompositeKey;
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 }

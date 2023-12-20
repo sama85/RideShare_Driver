@@ -29,7 +29,7 @@ public class CreateRideViewModel extends AndroidViewModel {
     private FirebaseUser firebaseUser;
     private DatabaseReference ridesRef;
     public LiveData<User> driver;
-    private String rideCompositeKey = "rideCompositeKey";
+    private String dateTimeKey = "dateTime";
     public CreateRideViewModel(@NonNull Application application) {
         super(application);
         repository = new Repository(application);
@@ -49,21 +49,21 @@ public class CreateRideViewModel extends AndroidViewModel {
         ride.setCarNumber(driver.getCarNumber());
         ride.setStatus(RideStatus.AVAILABLE.status);
 
-        /** add ride if it doesn't exist already */
+        /** add ride if no other ride exist at this time */
 
-        String compositeKey = ride.getSrc()+","+ride.getDest()+","+ride.getDate()+","+ride.getTime();
+        String dateTimeKey = ride.getDate()+","+ride.getTime();
         final boolean[] exists = {false};
 
-        Query query = ridesRef.orderByChild(rideCompositeKey).equalTo(compositeKey);
+        Query query = ridesRef.orderByChild("dateTime").equalTo(dateTimeKey);
         query.addListenerForSingleValueEvent(new ValueEventListener()
             {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) Toast.makeText(getApplication().getApplicationContext(), "Ride already exists!", Toast.LENGTH_SHORT).show();
+                if(snapshot.exists()) Toast.makeText(getApplication().getApplicationContext(), "Ride already exists at this date and time!", Toast.LENGTH_SHORT).show();
                 else{
                     String key = ridesRef.push().getKey();
                     ride.setPushId(key);
-                    ride.setRideCompositeKey(compositeKey);
+                    ride.setDateTime(dateTimeKey);
                     ridesRef.child(key).setValue(ride).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
