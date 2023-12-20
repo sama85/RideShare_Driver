@@ -40,7 +40,7 @@ public abstract class UserDatabase extends RoomDatabase{
                 UserDao dao = instance.userDao();
                 dao.deleteAll();
 
-                User user = new User("driver1@gmail.com", "driver1", "12345678990", "A1234");
+                User user = new User("test_driver1@eng.asu.edu.eg", "testDriver1", "178990", "A1234");
                 dao.insert(user);
             });
         }

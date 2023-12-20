@@ -68,8 +68,8 @@ public class RequestsViewModel extends AndroidViewModel {
                         String paymentMethod = dataSnapshot.child("paymentMethod").getValue(String.class);
                         Order order = new Order(riderName, orderId, paymentMethod, orderStatus);
 
-                        // fetch only pending requests
-                        if(id != null && orderStatus.equals(RequestStatus.PENDING.status)) {
+                        // fetch only pending requests req pending makes error in order
+                        if(id != null && orderStatus.equals("pending")) {
                             ids.add(id);
                             ordersList.add(order);
                         }
@@ -97,14 +97,12 @@ public class RequestsViewModel extends AndroidViewModel {
                         // create request with ride and rider name and send to adapter to display
                         for(String id : ids) {
                             //search ride in ids
-                            if (ride != null && dataSnapshot.getKey().equals(id)
-                            && !ride.getStatus().equals("cancelled")) {
-                                int idx = ridesId.getValue().indexOf(id);
-                                Order order = orders.get(idx);
+                            if (ride != null && dataSnapshot.getKey().equals(id)){
+//                            && !(ride.getStatus().equals("cancelled"))) {
+                                Log.i("request", String.valueOf(ids.size() +"," + orders.size()));
+                                    if(!checkExpired(ride))
+                                        ridesList.add(ride);
 
-                                // add only non-expired requests to display
-                                if(!checkExpired(ride, order))
-                                    ridesList.add(ride);
                             }
                         }
                     }
@@ -122,8 +120,8 @@ public class RequestsViewModel extends AndroidViewModel {
     public void decline(Ride ride, Order order){
         // update order status to declined
         ordersRef.child(order.getPushId()).child("status").setValue(RequestStatus.DECLINE.status);
-        // remove this ride from rides list
-        //removeFromRequests(ride, order);
+        //remove this ride from rides list
+       removeFromRequests(ride, order);
     }
 
     public void confirm(Ride ride, Order order){
@@ -138,7 +136,6 @@ public class RequestsViewModel extends AndroidViewModel {
                     .setValue(CreateRideViewModel.RideStatus.UNAVAILABLE.status);
         }
 
-
     }
 
     private void removeFromRequests(Ride ride, Order order) {
@@ -148,9 +145,10 @@ public class RequestsViewModel extends AndroidViewModel {
         ridesList.remove(ride);
         idsList.remove(ride.getPushId());
         ridesId.setValue(idsList);
+        rides.setValue(ridesList);
     }
 
-    private boolean checkExpired(Ride ride, Order order) {
+    private boolean checkExpired(Ride ride) {
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
             DateTimeFormatter timeFormatter= DateTimeFormatter.ofPattern("h:mm a");
