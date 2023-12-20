@@ -10,6 +10,6 @@
         android:id="@+id/requestsFragment"
         android:icon="@drawable/ic_request"/>
     <item android:title=" "
-        android:id="@+id/history_item"
+        android:id="@+id/ridesTrackingFragment"
         android:icon="@drawable/ic_history"/>
 </menu>

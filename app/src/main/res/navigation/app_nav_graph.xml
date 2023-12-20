@@ -8,7 +8,11 @@
     <fragment
         android:id="@+id/createRideFragment"
         android:name="com.example.rideshare_driver.view.CreateRideFragment"
-        android:label="CreateRideFragment" />
+        android:label="CreateRideFragment" >
+        <action
+            android:id="@+id/action_createRideFragment_to_ridesTrackingFragment"
+            app:destination="@id/ridesTrackingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.rideshare_driver.view.profileFragment"
@@ -18,4 +22,8 @@
         android:id="@+id/requestsFragment"
         android:name="com.example.rideshare_driver.view.RequestsFragment"
         android:label="RequestsFragment" />
+    <fragment
+        android:id="@+id/ridesTrackingFragment"
+        android:name="com.example.rideshare_driver.view.RidesTrackingFragment"
+        android:label="RidesTrackingFragment" />
 </navigation>
