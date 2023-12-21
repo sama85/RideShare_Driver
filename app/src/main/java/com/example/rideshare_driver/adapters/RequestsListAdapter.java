@@ -11,6 +11,7 @@ import com.example.rideshare_driver.databinding.RequestItemBinding;
 import com.example.rideshare_driver.models.Order;
 import com.example.rideshare_driver.models.Ride;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RequestsListAdapter extends  RecyclerView.Adapter<RequestsListAdapter.RideViewHolder>{
@@ -28,6 +29,7 @@ public class RequestsListAdapter extends  RecyclerView.Adapter<RequestsListAdapt
     @Override
     public void onBindViewHolder(@NonNull RideViewHolder holder, int position) {
         Ride rideItem = rides.get(position);
+
         Order order = orders.get(position);
         holder.bind(rideItem, order);
     }
@@ -40,9 +42,8 @@ public class RequestsListAdapter extends  RecyclerView.Adapter<RequestsListAdapt
     public void updateRides(List<Ride> rides, List<Order> orders) {
         this.rides = rides;
         this.orders = orders;
-        Log.i("requests", "rides" + String.valueOf(rides.size()));
-        if(rides.size() > 0) Log.i("requests", rides.get(0).getPushId());
-        Log.i("requests", "orders" + String.valueOf(orders.size()));
+        if(orders.size() <= 0) this.rides = new ArrayList<>();
+
         // to redraw recycler view
         notifyDataSetChanged();
     }

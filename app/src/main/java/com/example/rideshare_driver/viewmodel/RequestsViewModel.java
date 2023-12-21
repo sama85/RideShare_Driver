@@ -68,10 +68,13 @@ public class RequestsViewModel extends AndroidViewModel {
                         String paymentMethod = dataSnapshot.child("paymentMethod").getValue(String.class);
                         Order order = new Order(riderName, orderId, paymentMethod, orderStatus);
 
-                        // fetch only pending requests req pending makes error in order
                         if(id != null && orderStatus.equals("pending")) {
                             ids.add(id);
                             ordersList.add(order);
+                        }
+                        if(id != null && orderStatus.equals("expired")){
+                            ids.remove(id);
+                            ordersList.remove(order);
                         }
                     }
                     ridesId.setValue(ids);
